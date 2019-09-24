@@ -18,15 +18,17 @@ class AuthorsList extends Component {
   };
 
   render() {
-    const authorCards = this.state.filteredAuthors.map(author => (
+    const authorCards = this.state.filteredAuthors.map(author =>
       <AuthorCard key={author.id} author={author} />
-    ));
+    );
 
     return (
       <div>
         <h3>Authors</h3>
         <SearchBar onChange={this.filterAuthors} />
-        <div className="row">{authorCards}</div>
+        <div className="row">
+          {authorCards}
+        </div>
       </div>
     );
   }

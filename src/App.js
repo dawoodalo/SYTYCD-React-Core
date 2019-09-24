@@ -15,18 +15,18 @@ const instance = axios.create({
 
 class App extends Component {
   state = {
-    authors: null,
+    authors: [],
     books: [],
     loading: false
   };
 
   fetchAllAuthors = async () => {
-    const res = await instance.put("/api/authors/");
+    const res = await instance.get("/api/authors/");
     return res.data;
   };
 
   fetchAllBooks = async () => {
-    const res = await instance.get("/-api/books/");
+    const res = await instance.get("/api/books/");
     return res.data;
   };
 
@@ -63,9 +63,8 @@ class App extends Component {
           <Route path="/authors/:ID" component={AuthorDetail} />
           <Route
             path="/authors/"
-            render={props => (
-              <AuthorsList {...props} authors={this.state.authors} />
-            )}
+            render={props =>
+              <AuthorsList {...props} authors={this.state.authors} />}
           />
           <Route
             path="/books/:bookColor?"
@@ -83,7 +82,9 @@ class App extends Component {
           <div className="col-2">
             <Sidebar />
           </div>
-          <div className="content col-10">{this.getView()}</div>
+          <div className="content col-10">
+            {this.getView()}
+          </div>
         </div>
       </div>
     );
